@@ -29,4 +29,27 @@ print("count :"+str(count))
 print("average: "+str(total/count))
 
 		
-	
+	'''****** doing this with regular expressions**********'''
+import string
+import re
+
+fname = input("enter file name:")
+path = "C:/Users/SomandLily/Documents/GitHub/Py4e-Coursera/Python_Data_Structures/Data/"
+fname = path+fname
+try:
+	file = open(fname)
+except:
+	print("can't open file: "+fname)
+total = 0
+count = 0
+for line in file:
+	if line.startswith('X-DSPAM-Confidence:'):
+		m = re.search(r'.*?([\d+]*\.[\d]+)',line)
+		if m:
+			total += float(m.group(1))
+			count += 1
+		else:
+			continue
+print("Total: "+str(total))
+print("count: "+str(count))
+print("average: "+str(total/count))
